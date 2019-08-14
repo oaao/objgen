@@ -3,7 +3,11 @@ class Base:
     def __init__(self, *specs, **kwargs):
 
         for spec in specs:
-            self.digest(spec)
+            try:
+                spec_dict = dict(spec)
+                self.digest(spec_dict)
+            except ValueError:
+                print(f'Element cannot be cast into dict, and is being discarded: {type(spec)} {spec}')
 
         self.digest(kwargs)
 

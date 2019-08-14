@@ -1,6 +1,9 @@
 # objgen
 
-Dynamically generate Python class objects by digesting key-value / pairwise data structures as object specifications.
+Dynamically generate class objects by digesting key-value / pairwise data structures as object specifications.
+
+`objgen` has no external dependencies and can be used immediately.
+
 
 ## usage
 
@@ -20,6 +23,21 @@ Pass a dictionary to a generator instance to construct its object, then use the 
 >>> hydrated.attr1, hydrated.attr2, hydrated.attr3
 ('val1', 'val2', 'val3')
 ```
+
+Anything that can be cast into a dictionary will be digested. Anything that cannot will be lost as information and announced as such.
+
+```python
+>>> from objgen.generators.generic import Base, Recursive
+>>> b = Base(
+...     {'this': 'is', 'valid': 'input'},
+...     'this_is_not_pairwise_data',
+...     [('this', 'however'), ('will', 'work'), ('just', 'fine')]
+... )
+Element cannot be cast into dict, and is being discarded: <class 'str'> this_is_not_pairwise_data
+>>> b
+Base ['this', 'valid', 'will', 'just']
+```
+----
 
 ## gore ( fun! ( examples ) ) <a name="ex"></a>
 
