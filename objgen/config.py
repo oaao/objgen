@@ -1,3 +1,11 @@
+DOG_INFO = {
+    'name': 'monty',
+    'breed': 'donkey child',
+    'is_good_boy': True,
+    'actions': {'run_to': 'car', 'bark_at': 'squirrel', 'pee_on': 'hydrant'},
+}
+
+
 EXAMPLE_ENDPOINT = {
     'path': 'my_path',
 
