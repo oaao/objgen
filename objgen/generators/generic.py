@@ -11,6 +11,9 @@ class Base:
         for field in data:
             setattr(self, field, data[field])
 
+    def __repr__(self):
+        return f'{self.__class__.__name__} {list(vars(self).keys())}'
+
 
 class Recursive(Base):
 
