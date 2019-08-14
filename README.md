@@ -5,7 +5,7 @@ Dynamically generate Python class objects by digesting key-value / pairwise data
 ## usage
 
 ```python
->>> from objgen.generators.base import Base
+>>> from objgen.generators.generic import Base
 >>> base = Base()
 >>> vars(base)
 {}
@@ -42,7 +42,7 @@ Say we want to create a `dog`, but also be able to access/call a `dog.actions.{a
 Instantiate and hydrate a generator as `dog`, then do the same to the resulting `dog.actions`.
 
 ```python
->>> from objgen.generators.base import Base
+>>> from objgen.generators.generic import Base
 >>>
 >>> dog = Base(dog_info)
 >>> dog.actions
@@ -75,11 +75,11 @@ a `Recursive` generator will continue to digest any dictionary objects it encoun
 Let's try making our `dog` again, but with a `Recursive` generator:
 
 ```python
->>> from objgen.generators.base import Recursive
+>>> from objgen.generators.generic import Recursive
 >>>
 >>> dog = Recursive(dog_info)
 >>> dog.actions
-<objgen.generators.base.Recursive object at 0x7f2bb4ef2c18>
+<objgen.generators.generic.Recursive object at 0x7f2bb4ef2c18>
 >>> dog.actions.run_to
 'car'
 ```
