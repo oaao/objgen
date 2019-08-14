@@ -21,7 +21,7 @@ Pass a dictionary to a generator instance to construct its object, then use the 
 ('val1', 'val2', 'val3')
 ```
 
-## gore ( fun! ( examples ) )
+## gore ( fun! ( examples ) ) <a name="ex"></a>
 
 + [nesting is possible, intentional, and half the point of all this!](#ex_nesting_manual)
 + [nesting can be recursive, if we let it](#ex_nesting_recursive)
@@ -53,8 +53,10 @@ Instantiate and hydrate a generator as `dog`, then do the same to the resulting 
 ```
 
 ----
+[back](#ex)
 
 ### nesting - recursive <a name="ex_nesting_recursive"></a>
+
 
 Let's make a `Recursive` generator to digest the full depth of the data structure, since it would be ridiculous to have to `cls.attr = Base(cls.attr)` for all nested attributes at any 'depth'.
 
@@ -83,3 +85,4 @@ Let's try making our `dog` again, but with a `Recursive` generator:
 ```
 
 ----
+[back](#ex)
