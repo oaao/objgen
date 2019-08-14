@@ -24,7 +24,8 @@ Pass a dictionary to a generator instance to construct its object, then use the 
 ('val1', 'val2', 'val3')
 ```
 
-Anything that can be cast into a dictionary will be digested. Anything that cannot will be lost as information and announced as such.
+Any input that can be cast into a dictionary will be digested; any data that cannot will be discarded.
+
 
 ```python
 >>> from objgen.generators.generic import Base, Recursive
@@ -34,9 +35,20 @@ Anything that can be cast into a dictionary will be digested. Anything that cann
 ...     [('this', 'however'), ('will', 'work'), ('just', 'fine')]
 ... )
 Element cannot be cast into dict, and is being discarded: <class 'str'> this_is_not_pairwise_data
->>> b
-Base ['this', 'valid', 'will', 'just']
 ```
+
+If multiples of a field exists in a given collection of input arguments, the most recent passed value for that field will be preserved.
+
+
+
+```python
+>>> b = Base({'this': 'is'}, [('this', 'however'), ])
+>>> b
+Base ['this']
+>>> b.this
+'however'
+```
+
 ----
 
 ## gore ( fun! ( examples ) ) <a name="ex"></a>
@@ -75,8 +87,7 @@ Instantiate and hydrate a generator as `dog`, then do the same to the resulting 
 
 ### nesting - recursive <a name="ex_nesting_recursive"></a>
 
-
-Let's make a `Recursive` generator to digest the full depth of the data structure, since it would be ridiculous to have to `cls.attr = Base(cls.attr)` for all nested attributes at any 'depth'.
+Let's make a `Recursive` generator to digest the full depth of the data structure -- having to call `cls.attr = Base(cls.attr)` for every single nested attributes at each given 'depth' is ridiculous.
 
 Whereas a `Base` generator will simply create `cls.key = value` relationships,
 ```python
