@@ -24,6 +24,8 @@ Pass a dictionary to a generator instance to construct its object, then use the 
 ## gore ( fun! ( examples ) )
 
 + [nesting is possible, intentional, and half the point of all this!](#ex_nesting_manual)
++ [nesting can be recursive, if we let it](#ex_nesting_recursive)
+
 
 ### nesting - manual <a name="ex_nesting_manual"></a>
 
@@ -31,6 +33,7 @@ Say we want to create a `dog`, but also be able to access/call a `dog.actions.{a
 ```python
 >>> dog_info = {
 ...         'name': 'monty',
+...         'breed': 'donkey child',
 ...         'is_good_boy': True,
 ...         'actions': {'run_to': 'car', 'bark_at': 'squirrel', 'pee_on': 'hydrant'},
 ...     }
@@ -40,6 +43,7 @@ Instantiate and hydrate a generator as `dog`, then do the same to the resulting 
 
 ```python
 >>> from objgen.generators.base import Base
+>>>
 >>> dog = Base(dog_info)
 >>> dog.actions
 {'run_to': 'car', 'bark_at': 'squirrel', 'pee_on': 'hydrant'}
@@ -47,3 +51,35 @@ Instantiate and hydrate a generator as `dog`, then do the same to the resulting 
 >>> dog.actions.run_to
 'car'
 ```
+
+----
+
+### nesting - recursive <a name="ex_nesting_recursive"></a>
+
+Let's make a `Recursive` generator to digest the full depth of the data structure, since it would be ridiculous to have to `cls.attr = Base(cls.attr)` for all nested attributes at any 'depth'.
+
+Whereas a `Base` generator will simply create `cls.key = value` relationships,
+```python
+                setattr(self, field, spec[field])
+```
+
+a `Recursive` generator will continue to digest any dictionary objects it encounters along any nesting path.
+
+```python
+                if isinstance(spec[field], dict):
+                    setattr(self, field, Recursive(spec[field]))
+```
+
+Let's try making our `dog` again, but with a `Recursive` generator:
+
+```python
+>>> from objgen.generators.base import Recursive
+>>>
+>>> dog = Recursive(dog_info)
+>>> dog.actions
+<objgen.generators.base.Recursive object at 0x7f2bb4ef2c18>
+>>> dog.actions.run_to
+'car'
+```
+
+----
