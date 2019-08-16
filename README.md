@@ -2,7 +2,7 @@
 
 Dynamically generate class objects by digesting key-value / pairwise data structures as object specifications.
 
-`objgen` has no external dependencies and can be used immediately.
+`objgen` has no external dependencies, can be used immediately, and is more fun (and less limiting) than calling `type('ClassName', (*inheritances), {'attr': 'value'})`.
 
 
 ## usage
@@ -38,7 +38,6 @@ Element cannot be cast into dict, and is being discarded: <class 'str'> this_is_
 ```
 
 If multiples of a field exists in a given collection of input arguments, the most recent passed value for that field will be preserved.
-
 
 
 ```python
