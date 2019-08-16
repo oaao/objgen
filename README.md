@@ -55,6 +55,7 @@ Base ['this']
 
 + [nesting is possible, intentional, and half the point of all this!](#ex_nesting_manual)
 + [nesting can be recursive, if we let it](#ex_nesting_recursive)
++ [recursive nesting can be inclusively/exclusively filtered](#ex_nesting_selective)
 
 
 ### nesting - manual <a name="ex_nesting_manual"></a>
@@ -112,6 +113,46 @@ Let's try making our `dog` again, but with a `Recursive` generator:
 >>> dog.actions.run_to
 'car'
 ```
+
+----
+[back](#ex)
+
+### nesting -  selectively recursive <a name="ex_nesting_selective"></a>
+
+So far so good - except, what if we *want* certain things to stay as dictionaries, rather than be indiscriminately digested?
+
+For example, we want to add our `dog`'s friends, and be able to access `dog.friends` - however, it would be silly for each `{friend}` to become a `dog.friends.{friend}` attribute instead of staying preserved as elements in a data structure.
+
+```python
+... dog_info.update(
+...     {
+...         'friends': {
+...             'lassie': {'breed': 'collie', 'met_at': 'dog park'},
+...             'marnie': {'breed': 'shih tzu', 'met_at': 'dms'},
+...             'air_bud': {'breed': 'golden retriever', 'met_at': 'basketball courts'},
+...             'laika': {'breed': 'mongrel', 'met_at': 'outer space'}
+...         }
+...    }
+...)
+```
+
+Let's make a `RecursiveFiltered` that deals with this for us.
+
+Optionally, supply either `_exclude` or `_include_only` keyword arguments when creating the `RecursiveFilter` to determine which fields are (dis)allowed to be digested.
+
+```python
+>>> from objgen.generators.generic import RecursiveFiltered
+>>>
+>>> dog = RecursiveFiltered(dog_info, _exclude='friends')
+>>>
+>>> type(dog.actions)
+<class 'objgen.generators.generic.RecursiveFiltered'>
+>>> type(dog.friends)
+<class 'dict'>
+
+```
+
+Note that excluding a field means that digestion along that path in the data tree will terminate at that field, rather than skip that field and continue down that path's depth.
 
 ----
 [back](#ex)
