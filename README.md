@@ -2,7 +2,7 @@
 
 Dynamically generate class objects by digesting key-value / pairwise data structures as object specifications.
 
-`objgen` has no external dependencies, can be used immediately, and is more fun (and less limiting) than calling `type('ClassName', (*inheritances), {'attr': 'value'})`.
+`objgen` has no external dependencies, can be used immediately, and is more fun (and less limiting) than calling `type('NewClassName', (*inheritances), {'attr': 'value'})`.
 
 
 ## usage
