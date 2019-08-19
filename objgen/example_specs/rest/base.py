@@ -1,3 +1,5 @@
+BASE_URL = 'https://api.example.com/'
+
 SINGLE_ENDPOINT = {
     'path': 'my_path',
 
@@ -12,6 +14,11 @@ SINGLE_ENDPOINT = {
         ('name', str),
         ('age', int),
         ('hobbies', list)
+    ],
+
+    'filters': [
+        'name',
+        'age'
     ]
 }
 
@@ -32,6 +39,11 @@ MULTIPLE_ENDPOINT = {
             ('age', int),
             ('hobbies', list)
         ],
+
+        'filters': [
+            'name',
+            'age'
+        ]
     },
 
     'pet': {
@@ -46,6 +58,11 @@ MULTIPLE_ENDPOINT = {
             ('name', str),
             ('age', int),
             ('species', str),
+        ],
+
+        'filters': [
+            'name',
+            'age'
         ]
     }
 }
