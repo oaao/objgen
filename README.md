@@ -28,7 +28,7 @@ Any input that can be cast into a dictionary will be digested; any data that can
 
 
 ```python
->>> from objgen.generators.generic import Base, Recursive
+>>> from objgen.generators.generic import Base
 >>> b = Base(
 ...     {'this': 'is', 'valid': 'input'},
 ...     'this_is_not_pairwise_data',
